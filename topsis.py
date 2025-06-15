@@ -1,6 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import seaborn as sns
-
 
 class Topsis:
 
@@ -50,12 +50,11 @@ class Topsis:
         alternatives = [f"A{idx + 1}" for i, idx in enumerate(ranking)]
         closeness_ordered = self.closeness[ranking]
 
-        plot = sns.barplot(x=alternatives, y=closeness_ordered, hue=alternatives, legend=False)
-        plot.set_ylabel("Closeness Coefficient")
-        plot.set_xlabel("Alternatives")
+        fig, ax = plt.subplots()
+        ax.bar(alternatives, closeness_ordered)
+        ax.set(title="Ranking das alternativas", xlabel="Alternativas", ylabel="Proximidade relativa")
 
-        fig = plot.get_figure()
-        fig.savefig("ranking.png")
+        plt.savefig("ranking.png")
 
 
 def distance(a, b):
